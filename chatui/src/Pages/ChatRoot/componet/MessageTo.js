@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './css/MessageTo.css'
 import { Row, Col ,Stack} from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-const MessageTo = () => {
+import { updateSenderStatus } from '../../../features/Messages'
+const MessageTo = ({socket}) => {
 
-  const sendTo = useSelector(state=>state.msgSlice.MessageHeader.sendTo)
+  const header = useSelector(state=>state.msgSlice.MessageHeader)
+  const [status ,setStatus] = useState('');
+  const [isTyping ,setTpying] =useState(false);
+  
+  
+  socket.emit("onlineChecking",header);
+  
+  socket.on("typing", (res_isTyping)=>{
+    console.log("isTpying ?" ,res_isTyping)
+    setTpying(res_isTyping)
+
+    isTyping ? setStatus("typing...") :setStatus("")
+  })
+  
+  socket.on("onlineChecking" , (onlineStatus)=>{
+    console.log("Your status is retrieved ", onlineStatus);
+    console.log(status==="")
+        !isTyping && setStatus(onlineStatus)
+
+  })
+
+
   return (
     <div className='sendToBound'>
         <Row>
@@ -13,8 +35,8 @@ const MessageTo = () => {
             </Col>
             <Col>
             <Stack  direction="vertical" gap={1}>
-                <div>{sendTo}</div>
-                <div className='typing'>Typing...</div>
+                <div>{header.sendTo}</div>
+                <div className='typing'>{status}</div>
 
             </Stack>
             </Col>
