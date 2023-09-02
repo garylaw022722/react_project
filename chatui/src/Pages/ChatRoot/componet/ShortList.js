@@ -11,7 +11,7 @@ const ShortList = ({setOuterQueue}) => {
 
   const [contactList ,setContactList] = useState([]);
   const {data ,isLoading ,isFetched,error} =useQuery(["getContactList"] , ()=>{
-      return axios.get( "http://127.0.0.1:4085/nusrRoute/getPrivateMessage",{
+      return axios.get( "http://127.0.0.1:4085/nusrRoute/getContactList",{
         headers :{
             Authorization :profile.access_Token
         }
@@ -23,7 +23,7 @@ const ShortList = ({setOuterQueue}) => {
     items = data?.data.map(({participant, sources,privateRoom_Token},index)=>{
       
       const sender = participant.filter( usr => usr !== profile.username)
-      const {message ,sumited_at ,sender:last_Msg_Sender} =  sources.slice(-1)[0]
+      const {message ,sumited_at ,sender:last_Msg_Sender} =  sources[0]
        
       const msg=(last_Msg_Sender!== profile.username)?message:`You : ${message}`
 
