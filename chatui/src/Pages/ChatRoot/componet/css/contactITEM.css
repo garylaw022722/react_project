@@ -1,0 +1,33 @@
+.Contact_itemContainer{
+    border-bottom: 1px solid gainsboro;
+    height: 100px;
+    padding: 10px;
+    background-color:f0f2f5;
+}
+
+.Contact_itemContainer:hover{
+    background-color: rgb(173, 216, 246);
+    cursor: pointer;
+}
+
+
+.icon{
+    border-radius:50% ;
+    width: 50px;
+    height: 50px;
+    background-color: beige;
+}
+
+.itemDateTime{
+    font-size: 12px;
+    text-align: right;
+}
+.latestMSG{
+    font-size: 14px;
+    white-space: nowrap; 
+    overflow: hidden;
+    width: 80%; 
+    text-overflow: ellipsis;
+
+
+}

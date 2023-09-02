@@ -1,0 +1,18 @@
+.msgLayout_sender{
+    z-index: 13;
+    padding: 10px;
+    position: relative;
+    z-index: 20;
+    /* filter: blur(0px); */
+    /* -webkit-filter: blur(0px); */
+}
+
+
+.Sender_MainContent{
+    padding: 10px;
+    font-size: medium;
+    background: #efc246;
+    border-radius: 8px;
+    max-width: 45%;
+    
+}

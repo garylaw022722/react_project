@@ -1,0 +1,15 @@
+version : '3.4'
+services:
+    chatmongo:
+      image:  mongo
+      container_name: chatmongo 
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+      ports:
+        - 27017:27017
+      volumes:
+        - data:/data/db
+
+volumes:
+  data: 

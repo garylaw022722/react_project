@@ -1,0 +1,14 @@
+[
+    {
+        "Description": "Admin",
+        "ref_Code": "639c1115ab55d139a527f7bb3c1a9570bb60cf96f5c13bdaa41a7264a74e748f"
+    },
+    {
+        "Description": "User",
+        "ref_Code": "5f302d143dace627a6a87157fd1362b010874e4dc64609b17d87db648de0af3c"
+    },
+    {
+        "Description": "UnRegistraiont",
+        "ref_Code": "e39eef82f61b21e2e7f762fcc4307358f165757f2e77ec855d6992f7e0191932"
+    }
+]

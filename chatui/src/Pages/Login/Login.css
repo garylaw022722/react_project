@@ -1,0 +1,20 @@
+
+
+.emptySpace{
+    background-color: rgb(190, 210, 237);
+}
+
+.btnLogin{
+    margin-top: 10px;
+    background-color: rgb(59, 72, 117);
+}
+
+.registeration_dir{
+    text-decoration: none;
+    color: grey;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    padding-top: 10%;
+}

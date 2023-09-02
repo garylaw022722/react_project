@@ -1,0 +1,19 @@
+.msgLayout{
+    z-index: 13;
+    color:rgb(72, 73, 69);
+    background: #65c9ff;
+    padding: 10px;
+    font-size: medium;
+    max-width: 45%;
+    min-width: 20%;
+    z-index: 20;
+    width: fit-content;
+    overflow-wrap: break-word;
+    /* position: absolute; */
+    border-radius: 8px;
+}
+
+.sender{
+    color: #e9f5fc;    
+}
+

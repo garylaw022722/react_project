@@ -1,0 +1,8 @@
+
+.LoginForm{
+   border: 1px solid gainsboro;
+}
+
+#btnSubmit{
+    background-color: rgb(29, 62, 92);
+}

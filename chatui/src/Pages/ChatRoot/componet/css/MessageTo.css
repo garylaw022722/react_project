@@ -1,0 +1,19 @@
+.sendToBound{
+    background-color:f0f2f5;
+    padding: 15px;
+    height: 10vh;
+    border: 1px solid gainsboro;
+
+}
+
+.imageBox{
+    height: 50px;
+    width:50px;
+    background-color: #849293;
+    border-radius: 50%;
+    display: inline-block;
+}
+.typing{
+     font-size: 12px;
+
+}
