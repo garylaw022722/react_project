@@ -7,7 +7,8 @@ let MSG_initState ={
                 sender : '',
                 chatId:''
         },
-        messageQueue: []
+        messageQueue: [],
+        senderStatus :''
         
     
 }
@@ -24,13 +25,14 @@ const MessageSlice =  createSlice({
        updateMessageQueue :(state, Action)=>{
 
             state.messageQueue = [...state.messageQueue , Action.payload]
-
-
+       },
+       updateSenderStatus :(state,Action)=>{
+                state.senderStatus = Action.payload;
        }
         
         
     }
 })
-export const {updateSenderTarget , updateMessageQueue} =MessageSlice.actions;
+export const {updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
 
 export default MessageSlice.reducer;

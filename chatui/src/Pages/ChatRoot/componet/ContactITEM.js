@@ -15,6 +15,7 @@ const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQu
   let date = format(new Date(dateTime) , "dd/MM/yyyy");
 
   
+  
   const client =useQueryClient();
   const fetChatRecord=()=>{
 
@@ -24,7 +25,7 @@ const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQu
             chatId:chatToken
         }
 
-      console.log(data)
+      console.log()
       // const result = client.getQueryData(["getContactList"])?.data                         
       //           .filter( (privateRoom)=> {
       //               return privateRoom.privateRoom_Token === chatToken

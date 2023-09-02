@@ -20,6 +20,9 @@ const getContactList = async(req,res,next)=>{
                 }
              }
          ])
+
+         console.log("contact List created ............" , logs);
+
         return res.send(logs)   
 
     }catch(err){

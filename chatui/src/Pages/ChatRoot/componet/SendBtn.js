@@ -37,8 +37,12 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom}) => {
   
             
     }
+    const focusout=(e)=>{
+        socket.emit("typing" ,{...senderInfo, isTyping:false})
+    }
     const typing=(e)=>{
         console.log("I am typing")
+        socket.emit("typing" ,{...senderInfo, isTyping:true})
         setMsg(e.target.value);
 
 
@@ -60,6 +64,7 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom}) => {
             placeholder='Enter your message here'
             value={msg}
             onChange={(e)=>typing(e)}
+            onBlur={(e)=>focusout(e)}
             />
         <Button onClick={send}> 
             <div style={SENDBTN_CSS}></div>

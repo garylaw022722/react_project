@@ -28,10 +28,6 @@ const ChatRoom = () => {
       socket.emit("jointRoom","ksksksks");
   })
 
-  socket.on("typing" ,data =>{
-     
-  })
-
 
 
   socket.on("ChatLog" ,data=>{
@@ -49,14 +45,14 @@ const ChatRoom = () => {
       <Row  style={{border:"1px solid red" ,height:"100vh"}}>
         <Col style={{border :"1px solid red" ,padding:'0'}} xs={3}> 
           <Stack>
-            <Action username={username}/>
+            <Action username={username} socket={socket}/>
             <Search />
             <ShortList  setOuterQueue={setOuterQueue} />
           </Stack>
         </Col>
         <Col style={{padding:'0'}} xs={9}>
           <Stack>
-              <MessageTo />
+              <MessageTo socket={socket}/>
               <MessagePannel socket={socket} cur_user={username} outerQueue={outerQueue}/></Stack>
         </Col>
       </Row>
