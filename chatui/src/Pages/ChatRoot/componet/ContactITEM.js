@@ -3,7 +3,7 @@ import { Row, Stack ,Col } from 'react-bootstrap'
 import './css/contactITEM.css'
 import {format} from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateSenderTarget } from '../../../features/Messages'
+import { updateOpenTheChat, updateSenderTarget } from '../../../features/Messages'
 import { useQueryClient  } from '@tanstack/react-query'
 
 
@@ -35,6 +35,7 @@ const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQu
       
       
       dispatch(updateSenderTarget(data));
+      dispatch(updateOpenTheChat(true));
 
       console.log("the queue is clear.......")
   } 

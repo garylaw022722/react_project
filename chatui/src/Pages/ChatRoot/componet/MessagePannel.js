@@ -52,8 +52,8 @@ const MessagePannel = ({socket,cur_user }) => {
 
                             })
                         } 
-                    <div ref={ref_Bottom}></div>
                     </Row>
+                    <div ref={ref_Bottom}></div>
                 </div>
         </div>
         <SendBtn socket={socket} msgQueue={msgQueue} setMsgQueue={setMsgQueue} ref_Bottom={ref_Bottom} />

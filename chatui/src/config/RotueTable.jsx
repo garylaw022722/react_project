@@ -1,5 +1,5 @@
 import React from 'react'
-import{ BrowserRouter as Router , Routes , Route} from 'react-router-dom'
+import{ BrowserRouter as Router , Routes , Route ,Navigator} from 'react-router-dom'
 import ChatRoom from '../Pages/ChatRoot/ChatRoom' 
 import Registration from '../Pages/UserRegistration/Registration'
 import LoginPages from '../Pages/Login/LoginPages'

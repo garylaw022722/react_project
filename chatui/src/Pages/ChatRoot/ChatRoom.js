@@ -18,6 +18,7 @@ const ChatRoom = () => {
   const [outerQueue , setOuterQueue] = useState([]);
   let socket =  io("http://127.0.0.1:4085/ChatServer");
   const {username} = useSelector(state => state.user.profile)
+  const openTheChat = useSelector(state => state.msgSlice.openTheChat);
 
 
   // # map the user  to the socket
@@ -51,9 +52,18 @@ const ChatRoom = () => {
           </Stack>
         </Col>
         <Col style={{padding:'0'}} xs={9}>
-          <Stack>
+          
+          <Stack hidden={!openTheChat}>
               <MessageTo socket={socket}/>
-              <MessagePannel socket={socket} cur_user={username} outerQueue={outerQueue}/></Stack>
+              <MessagePannel socket={socket} cur_user={username} outerQueue={outerQueue}/>
+          </Stack>
+          <div  hidden={openTheChat}
+                style={{
+                        textAlign:"center" ,
+                        paddingTop:"45vh",
+                        backgroundColor:"#e9edef",
+                        height :"100%"
+                  }}>Select a contact user from the list</div>
         </Col>
       </Row>
     </Container>
