@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import Action from "../Pages/ChatRoot/componet/Action"
-
+        
 let MSG_initState ={
         MessageHeader :{
                 sendTo : '',
@@ -8,7 +8,8 @@ let MSG_initState ={
                 chatId:''
         },
         messageQueue: [],
-        senderStatus :''
+        senderStatus :'',
+        openTheChat : false
         
     
 }
@@ -28,11 +29,14 @@ const MessageSlice =  createSlice({
        },
        updateSenderStatus :(state,Action)=>{
                 state.senderStatus = Action.payload;
+       },
+       updateOpenTheChat : (state, Action)=> {
+                state.openTheChat = Action
        }
         
         
     }
 })
-export const {updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
+export const {updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
 
 export default MessageSlice.reducer;

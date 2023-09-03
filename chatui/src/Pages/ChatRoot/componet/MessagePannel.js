@@ -14,26 +14,23 @@ const MessagePannel = ({socket,cur_user }) => {
     const ref_Bottom =useRef(null);
     
     const {chatId} =  useSelector(state=> state.msgSlice.MessageHeader);
+    const messageQueue =  useSelector(state=> state.msgSlice.messageQueue);
     // #message receive lisitener
     console.log(chatId)
     
     const client = useQueryClient();
-
+    const dispatch = useDispatch();
 
     const [msgQueue, setMsgQueue]= useState([]);
     // console.log("Catch obtain",result)
-
-    socket.on("message", (payload)=>{
-        console.log("payload gotted",payload)
-        setMsgQueue([...msgQueue , payload] )
-        // ref_Bottom?.current?.scrollIntoView({ 
-        //         behavior: 'instant', 
-        //         block: "end",
-        //         inline: "nearest",
-        //     });
-        // const element = document.getElementsByClassName("mainContentChat")
-        // element.scrollTop = element.scrollHeight;
-      })
+    useEffect(()=>{
+            socket.on("message", (payload)=>{
+                console.log("payload gotted",payload)
+                // setMsgQueue([...msgQueue , payload] )
+                dispatch(updateMessageQueue(payload))
+            
+            })
+    },[])
 
      
     
@@ -45,7 +42,7 @@ const MessagePannel = ({socket,cur_user }) => {
                     <Row>
                         {
 
-                            msgQueue.map(({sender,sendTo , sumited_at ,message} ,index)=>{
+                            messageQueue.map(({sender,sendTo , sumited_at ,message} ,index)=>{
                               if(cur_user===sendTo){
                                   return (<MessageReceiveLayout content={message} date={sumited_at} sender={sender} key={index}  />)
                               

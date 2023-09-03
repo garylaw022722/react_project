@@ -28,8 +28,8 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom}) => {
         socket.emit("message" , payload)
         payload.sumited_at = timestamp;
         
-        
-        setMsgQueue([...msgQueue ,payload])
+        dispatch(updateMessageQueue(payload))
+        // setMsgQueue([...msgQueue ,payload])
         setMsg('')
         ref_Bottom?.current?.scrollIntoView({ behavior: 'smooth' });
 
