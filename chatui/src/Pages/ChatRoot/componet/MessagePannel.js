@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateMessageQueue } from '../../../features/Messages'
 import {format } from 'date-fns'
 import SendBtn from './SendBtn'
-import { QueryCache, useQueryClient } from '@tanstack/react-query'
+import { QueryCache, useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 
 const MessagePannel = ({socket,cur_user }) => {
 
@@ -32,14 +32,21 @@ const MessagePannel = ({socket,cur_user }) => {
             })
     },[])
 
+    const {} = useInfiniteQuery([""])
+ 
+    const fetchData =()=>{
+        console.log("fetch")
+    }
+
+
      
     
 
   return (
     <React.Fragment>
-        <div className='pannelBound' >
+        <div className='pannelBound'  onScroll={fetchData}>
             <div className='mainContentChat'>
-                    <Row>
+                    <Row >
                         {
 
                             messageQueue.map(({sender,sendTo , sumited_at ,message} ,index)=>{

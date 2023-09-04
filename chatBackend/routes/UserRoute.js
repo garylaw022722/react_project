@@ -2,7 +2,7 @@ const express =require("express");
 const router = express.Router();
 const {authentication} = require("../controller/authenticateController");
 
-const {createChatRoom ,logout,getContactList, jointRoom ,loadPrivateMsg} = require("../controller/UserController")
+const {getMessageByToken, createChatRoom ,logout,getContactList, jointRoom ,loadPrivateMsg} = require("../controller/UserController")
 const jwtVerifier = require("../middlewares/jwtVerify");
 const { sendMessage } = require("../jobs/sendMessages");
 const jwtVertify = require("../middlewares/jwtVerify");
@@ -26,6 +26,9 @@ router.route("/getPrivateMessage")
 
 router.route("/getContactList")
       .get(jwtVerifier ,getContactList)
+
+router.route("/getMessageByToken")
+      .get(jwtVerifier ,getMessageByToken);
       
 
 module.exports= router;

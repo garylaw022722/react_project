@@ -5,6 +5,7 @@ import {format} from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateOpenTheChat, updateSenderTarget } from '../../../features/Messages'
 import { useQueryClient  } from '@tanstack/react-query'
+import { Socket } from 'socket.io-client'
 
 
 const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQueue}) => {
@@ -33,9 +34,10 @@ const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQu
       // setOuterQueue(result)
       // console.log("result data" , result)                
       
-      
       dispatch(updateSenderTarget(data));
       dispatch(updateOpenTheChat(true));
+
+      
 
       console.log("the queue is clear.......")
   } 

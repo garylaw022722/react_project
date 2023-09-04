@@ -46,6 +46,11 @@ const connectWebSocket =(appServer)=>{
             }
 
         } )
+
+        socket.on("jointPrivateRoom", ({room_id})=>{
+            socket.join(room_id);
+        })
+        
         socket.on("Logined", async(username)=>{  
             try{
                 console.log("debug---"+username)
@@ -70,10 +75,7 @@ const connectWebSocket =(appServer)=>{
             socket.join(room);
             console.log(socket.rooms)
         })
-        
-        socket.on("typing", (client) =>{
-
-        })
+   
 
         socket.on("message" , sendMessage(chatApp, socket))
     })

@@ -1,0 +1,27 @@
+const mongoose= require("mongoose");
+const privMSG =require("../model/PrivateMessage")
+const getMessageByToken = async(req ,res , next)=>{
+    const {token , page} = req.query;
+    try{
+
+        const log =  await privMSG.aggregate([
+
+            {
+                $project: {
+                    sources: 1,
+                    _id :0
+
+                }
+            }
+        ])
+
+        console.log(log)
+            
+        res.send({log})
+    }catch(err){
+        console.log(err)
+    }
+
+}
+
+module.exports = {getMessageByToken}

@@ -15,7 +15,6 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom}) => {
     const dispatch= useDispatch()    
     const  senderInfo =  useSelector(state => state.msgSlice.MessageHeader)
 
-    // const msgQueue =  useSelector(state=> state.msgSlice.messageQueue);
 
     const send = ()=>{
         const sendDate =new Date();
@@ -29,7 +28,6 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom}) => {
         payload.sumited_at = timestamp;
         
         dispatch(updateMessageQueue(payload))
-        // setMsgQueue([...msgQueue ,payload])
         setMsg('')
         ref_Bottom?.current?.scrollIntoView({ behavior: 'smooth' });
 

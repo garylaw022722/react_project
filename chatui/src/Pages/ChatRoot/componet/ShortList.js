@@ -16,6 +16,8 @@ const ShortList = ({setOuterQueue}) => {
             Authorization :profile.access_Token
         }
     })
+  } ,{
+    // refetchInterval: 1000
   })
   var items = [];
   if(isFetched && data?.data){
