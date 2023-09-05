@@ -54,8 +54,8 @@ const MessagePannel = ({socket,cur_user }) => {
         if (scrollTop <=  0){
             console.log("should fetch")
             if (scrollTop  <= scrollHeight * 0.2){
-                // fetchNextPage();
-                // e.target.scrollTop = scrollHeight ;
+                fetchNextPage();
+                e.target.scrollTop = scrollHeight ;
 
             }
         }
@@ -69,7 +69,7 @@ const MessagePannel = ({socket,cur_user }) => {
                 return  allPages.length +1 ;
         },
         enabled : chatId!=="",
-        // refetchInterval: 1500,   
+        refetchInterval: 1500,   
     })
     let msgs =[];
 
@@ -77,21 +77,17 @@ const MessagePannel = ({socket,cur_user }) => {
         const result =data?.pages.flatMap(ele =>ele.data)
         console.log("result " ,result) 
         msgs =result?.reverse();
-        
         data?.pages.length ==1 &&  ref_Bottom?.current?.scrollIntoView();
     }
 
-    const scroll = ()=>{
-    
-    }
-    
+   
 
   return (
     <React.Fragment>
         <div className='pannelBound' >
             <div className='mainContentChat'  onScroll={(e)=>fetchPriviousData(e)}  >
                     <Row >
-                        <div style={{backgroundColor :'red'}} onClick={scroll}>ksaskaksa</div>
+                        <div style={{backgroundColor :'red'}} >ksaskaksa</div>
                         {
                             msgs?.map(({sender,sendTo , sumited_at ,message} ,index)=>{
                               if(cur_user===sendTo){
