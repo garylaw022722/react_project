@@ -28,7 +28,7 @@ router.route("/getContactList")
       .get(jwtVerifier ,getContactList)
 
 router.route("/getMessageByToken")
-      .get(jwtVerifier ,getMessageByToken);
+      .post(jwtVerifier ,getMessageByToken);
       
 
 module.exports= router;

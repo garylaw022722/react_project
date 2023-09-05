@@ -32,11 +32,16 @@ const MessageSlice =  createSlice({
        },
        updateOpenTheChat : (state, Action)=> {
                 state.openTheChat = Action
+       },
+       setMessageQueue :(state , Action)=>{
+        state.messageQueue = Action.payload;
+
        }
+
         
         
     }
 })
-export const {updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
+export const {setMessageQueue ,updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
 
 export default MessageSlice.reducer;

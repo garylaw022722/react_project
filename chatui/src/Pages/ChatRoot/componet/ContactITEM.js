@@ -26,18 +26,11 @@ const ContactITEM = ({icon ,name, lastestMSG ,dateTime , chatToken   ,setOuterQu
             chatId:chatToken
         }
 
-      console.log()
-      // const result = client.getQueryData(["getContactList"])?.data                         
-      //           .filter( (privateRoom)=> {
-      //               return privateRoom.privateRoom_Token === chatToken
-      //           })[0]["sources"]
-      // setOuterQueue(result)
-      // console.log("result data" , result)                
-      
+  
       dispatch(updateSenderTarget(data));
       dispatch(updateOpenTheChat(true));
 
-      
+    
 
       console.log("the queue is clear.......")
   } 
