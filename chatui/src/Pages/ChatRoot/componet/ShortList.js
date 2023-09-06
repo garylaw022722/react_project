@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ContactITEM from './ContactITEM'
 import './css/shortList.css'
 import {getContactList} from'../../../api/getData'
 import { useQuery} from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-const ShortList = ({setOuterQueue}) => {
+import { alignPropType } from 'react-bootstrap/esm/types'
+const ShortList = ({}) => {
   
   const profile = useSelector(state=>state.user.profile);
 
@@ -20,14 +21,24 @@ const ShortList = ({setOuterQueue}) => {
     // refetchInterval: 1000
   })
   var items = [];
-  if(isFetched && data?.data){
-    
-    items = data?.data.map(({participant, sources,privateRoom_Token},index)=>{
+  if(isFetched){
+    console.log(`isFetched` ,isFetched)
+    items = data?.data?.map(({participant, sources,privateRoom_Token},index)=>{
       
       const sender = participant.filter( usr => usr !== profile.username)
-      const {message ,sumited_at ,sender:last_Msg_Sender} =  sources[0]
+      // not undefind 
+      if(!sources[0])
+          return  <ContactITEM  
+                          name={sender}
+                          chatToken ={privateRoom_Token}
+                          key={privateRoom_Token}  
+                          dateTime={new Date()}  
+                  />
+
+      const {message ,sumited_at ,sender:last_Msg_Sender} =  sources[0];
        
       const msg=(last_Msg_Sender!== profile.username)?message:`You : ${message}`
+
 
       return <ContactITEM 
                     lastestMSG={msg} 
@@ -35,21 +46,18 @@ const ShortList = ({setOuterQueue}) => {
                     dateTime={sumited_at} 
                     chatToken ={privateRoom_Token}
                     key={privateRoom_Token}  
-                    setOuterQueue={setOuterQueue}
                     />
  
 
     })
-
   }
-  
+
+
 
   return (
    
     <div className='contactList'>
-      {
-        items.map(e=>e)
-      }
+        {items.map(ele=>ele)}
     </div>
   )
 }

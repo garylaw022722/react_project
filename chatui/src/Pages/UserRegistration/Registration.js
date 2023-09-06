@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
 import {io} from 'socket.io-client'
 import './Registration.css'
+import axios from 'axios';
 
 
 const Registration = () => {
@@ -19,10 +20,9 @@ const Registration = () => {
     
 
 
-    const submit =(data:any)=>{
+    const submit =(data)=>{
         // socket.emit("Logined", data.email);
-
-
+        
     }
   return (
     <Container className='LoginForm w-50 mt-5 p-4'>

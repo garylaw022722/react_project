@@ -9,7 +9,9 @@ let MSG_initState ={
         },
         messageQueue: [],
         senderStatus :'',
-        openTheChat : false
+        openTheChat : false,
+        createNewContect : false,
+        newContactor :[]
         
     
 }
@@ -36,12 +38,15 @@ const MessageSlice =  createSlice({
        setMessageQueue :(state , Action)=>{
         state.messageQueue = Action.payload;
 
-       }
+       },
+       createNewContectFn : (state, Action)=> {
+        state.createNewContect = Action.payload
+        },
 
         
         
     }
 })
-export const {setMessageQueue ,updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
+export const {createNewContectFn,setMessageQueue ,updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
 
 export default MessageSlice.reducer;

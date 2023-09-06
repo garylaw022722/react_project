@@ -69,7 +69,7 @@ const MessagePannel = ({socket,cur_user }) => {
                 return  allPages.length +1 ;
         },
         enabled : chatId!=="",
-        refetchInterval: 1500,   
+        // refetchInterval: 1500,   
     })
     let msgs =[];
 

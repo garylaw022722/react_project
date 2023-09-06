@@ -13,12 +13,13 @@ import MessagePannel from './componet/MessagePannel';
 import SendBtn from './componet/SendBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUpSocket } from '../../features/userProfile';
+import  ContactCreateForm from './componet/ContactCreateForm'
 const ChatRoom = () => {
 
-  const [outerQueue , setOuterQueue] = useState([]);
+  const [contactList ,setContactList] = useState([]);
   let socket =  io("http://127.0.0.1:4085/ChatServer");
-  const {username} = useSelector(state => state.user.profile)
-  const openTheChat = useSelector(state => state.msgSlice.openTheChat);
+  const {username ,access_Token} = useSelector(state => state.user.profile)
+  const {openTheChat,createNewContect} = useSelector(state => state.msgSlice);
 
 
   // # map the user  to the socket
@@ -47,15 +48,23 @@ const ChatRoom = () => {
         <Col style={{border :"1px solid red" ,padding:'0'}} xs={3}> 
           <Stack>
             <Action username={username} socket={socket}/>
-            <Search />
-            <ShortList  setOuterQueue={setOuterQueue} />
+              {
+                createNewContect ?
+                <ContactCreateForm access_token={access_Token} />
+                
+                :<div>
+                  <Search />
+                  <ShortList  setContactList={setContactList} contactList={contactList} />
+                </div>
+              }
+         
           </Stack>
         </Col>
         <Col style={{padding:'0'}} xs={9}>
           
           <Stack hidden={!openTheChat}>
               <MessageTo socket={socket}/>
-              <MessagePannel socket={socket} cur_user={username} outerQueue={outerQueue}/>
+              <MessagePannel socket={socket} cur_user={username} />
           </Stack>
           <div  hidden={openTheChat}
                 style={{

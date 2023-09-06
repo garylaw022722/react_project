@@ -8,7 +8,8 @@ const jwtVertify = async(req,res,next)=>{
                 console.log(err)
                 res.status(401).send({"response":"No confidentials"});
             }
-            else{                
+            else{ 
+                req.token = token               
                 req.username = decode.username;
                 req.roles=decode.roles;
                 next();
