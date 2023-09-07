@@ -57,7 +57,7 @@ const ShortList = ({}) => {
   return (
    
     <div className='contactList'>
-        {items.map(ele=>ele)}
+        {items?.map(ele=>ele)}
     </div>
   )
 }

@@ -60,8 +60,7 @@ const connectWebSocket =(appServer)=>{
                     "isLogined": socket.connected
                 }   
                 
-                console.log(socket.userInfo)
-              
+                console.log(socket.userInfo)              
             }catch(err){
                 console.log(err)
             }

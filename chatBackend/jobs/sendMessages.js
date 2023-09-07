@@ -29,7 +29,7 @@ const sendMessage =(chatApp ,socket)=>{
                     }catch(err){
                         console.log(`the receiver ${sendTo} is offine ....` )
                     }finally{
-                        backupMsg(payload);
+                        // backupMsg(payload);
                     }
                 }
 

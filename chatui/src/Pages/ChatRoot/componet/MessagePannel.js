@@ -16,14 +16,13 @@ const MessagePannel = ({socket,cur_user }) => {
 
     
     const {chatId} =  useSelector(state=> state.msgSlice.MessageHeader);
-    const messageQueue =  useSelector(state=> state.msgSlice.messageQueue);
     const user =  useSelector(state=> state.user.profile);
     // #message receive lisitener
     console.log(chatId)
     
     const client = useQueryClient();
+    const chatKey =[process.env.REACT_APP_REACT_KEY_GET_MESSAGE , chatId];
 
-    const [msgQueue, setMsgQueue]= useState([]);
 
     
 
@@ -68,11 +67,9 @@ const MessagePannel = ({socket,cur_user }) => {
                 console.log("allPAges" ,allPages.length)
                 return  allPages.length +1 ;
         },
-        enabled : chatId!=="",
-        // refetchInterval: 1500,   
     })
+    
     let msgs =[];
-
     if (isFetched){
         const result =data?.pages.flatMap(ele =>ele.data)
         console.log("result " ,result) 
@@ -80,7 +77,16 @@ const MessagePannel = ({socket,cur_user }) => {
         data?.pages.length ==1 &&  ref_Bottom?.current?.scrollIntoView();
     }
 
-   
+
+        socket.on("message", (data)=>{
+            console.log("data");
+            client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_MESSAGE])
+            client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_CONTACT_LIST])
+        })
+
+
+
+
 
   return (
     <React.Fragment>
@@ -103,7 +109,7 @@ const MessagePannel = ({socket,cur_user }) => {
                     <div ref={ref_Bottom} ><p hidden={true}> This is bottom</p></div>
                 </div>
         </div>
-        <SendBtn socket={socket} msgQueue={msgQueue} setMsgQueue={setMsgQueue} ref_Bottom={ref_Bottom} />
+        <SendBtn socket={socket}  ref_Bottom={ref_Bottom} chatKey={chatKey}/>
     </React.Fragment>
   )
 }

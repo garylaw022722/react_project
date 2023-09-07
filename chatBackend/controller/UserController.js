@@ -5,6 +5,7 @@ const {loadingMsg :loadPrivateMsg} = require("../jobs/loadingMsg")
 const {getContactList} = require("../jobs/getContactList")
 const  {getMessageByToken} =require("../jobs/getMessageByToken")
 const  {createContactItem} =require("../jobs/createContactItem")
+const  {backupMsg} =require("../jobs/backupMsg")
 
 
 module.exports= {
@@ -14,5 +15,6 @@ module.exports= {
     loadPrivateMsg,
     getContactList,
     getMessageByToken,
-    createContactItem
+    createContactItem,
+    backupMsg
 }
