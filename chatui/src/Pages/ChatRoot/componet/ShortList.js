@@ -47,8 +47,11 @@ const ShortList = ({}) => {
                     chatToken ={privateRoom_Token}
                     key={privateRoom_Token}  
                     />
- 
 
+    })
+    items?.sort((item1 ,item2) => {
+      if(item2.props?.dateTime && item1.props?.dateTime)
+        return  new Date(item2.props.dateTime) -  new Date(item1.props.dateTime) 
     })
   }
 

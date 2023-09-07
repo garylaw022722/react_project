@@ -63,9 +63,7 @@ const MessagePannel = ({socket,cur_user }) => {
 
     const {isFetchingNextPage,data ,isLoading ,isStale ,hasNextPage ,isFetched, fetchNextPage} = useInfiniteQuery(["getMessageBytoken", chatId ], async({pageParam=0})=>await getRecord(pageParam) ,{
         getNextPageParam: (lastPage, allPages) =>{
-                console.log("lastPAge" ,lastPage.data)
-                console.log("allPAges" ,allPages.length)
-                return  allPages.length +1 ;
+                return  allPages?.length +1 ;
         },
     })
     
@@ -93,7 +91,6 @@ const MessagePannel = ({socket,cur_user }) => {
         <div className='pannelBound' >
             <div className='mainContentChat'  onScroll={(e)=>fetchPriviousData(e)}  >
                     <Row >
-                        <div style={{backgroundColor :'red'}} >ksaskaksa</div>
                         {
                             msgs?.map(({sender,sendTo , sumited_at ,message} ,index)=>{
                               if(cur_user===sendTo){

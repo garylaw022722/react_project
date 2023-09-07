@@ -1,7 +1,7 @@
 const  priMsgDB = require("../model/PrivateMessage")
 const userDB = require("../model/userDB")
 const axios = require("axios");
-const  {createHash} = require("crypto")
+const  {createHash, randomBytes} = require("crypto")
 const { getContactList } = require("./getContactList");
 
 
@@ -24,8 +24,10 @@ const  createContactItem =  async(req,res)=>{
 
     }
 
-    let content = await priMsgDB.count() ;
-    let privateRoom_token =  createHash(process.env.PRI_HASH).update(String(content+1)).digest("base64");
+    let content = await priMsgDB.count();
+    content += randomBytes(13).toString("hex")
+    
+    let privateRoom_token =  createHash(process.env.PRI_HASH).update(String(content)).digest("base64");
     privateRoom_token ="PRIV_"+ privateRoom_token;            
 
 
