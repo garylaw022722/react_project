@@ -13,35 +13,14 @@ const backupMsg = async(payload)=>{
                                 $all :participant
                         }
                     })
-        // find rind
-        if (room===null){
-             
-            let content = await priMsgDB.count() ;
-            console.log("Backupp catch");
-            let privateRoom_token =  createHash(process.env.PRI_HASH).update(String(content)).digest("base64");
-            
-            privateRoom_token ="PRIV_"+ privateRoom_token;            
-            
-            const row = {
-                "privateRoom_Token" : privateRoom_token,
-                "participant": participant,
-                "sources":[payload]
-            }
-            
-            console.log(`data insert \n\t ${JSON.stringify(row, null ,4)}`);
-            await priMsgDB.insertMany([row]);
         
-        }else{
-
             console.log("Update chatRoom content --- private ");
             room.sources.push(payload)
             room.save();
 
-        }
-    }catch(erro){
-        console.log(erro);
+    }catch(err){
+        console.log(err)
     }
-        
     
 }
 

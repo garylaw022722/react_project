@@ -61,10 +61,7 @@ const connectWebSocket =(appServer)=>{
                 }   
                 
                 console.log(socket.userInfo)
-                const chat_Logs=   await loadingMsg(username);
-                console.log("Logs : loading login proccess=---------")                    
-                console.log(chat_Logs)
-                socket.emit("ChatLog", chat_Logs);
+              
             }catch(err){
                 console.log(err)
             }
