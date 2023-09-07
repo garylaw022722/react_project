@@ -22,6 +22,7 @@ const Registration = () => {
 
     const submit =(data)=>{
         // socket.emit("Logined", data.email);
+        console.log("login")
         
     }
   return (
