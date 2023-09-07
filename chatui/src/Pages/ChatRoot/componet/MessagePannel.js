@@ -69,7 +69,7 @@ const MessagePannel = ({socket,cur_user }) => {
     
     let msgs =[];
     if (isFetched){
-        const result =data?.pages.flatMap(ele =>ele.data)
+        const result =data?.pages?.flatMap(ele =>ele.data)
         console.log("result " ,result) 
         msgs =result?.reverse();
         data?.pages.length ==1 &&  ref_Bottom?.current?.scrollIntoView();
