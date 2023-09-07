@@ -31,7 +31,7 @@ const ShortList = ({}) => {
           return  <ContactITEM  
                           name={sender}
                           chatToken ={privateRoom_Token}
-                          key={privateRoom_Token}  
+                          key={privateRoom_Token}                          
                           dateTime={new Date()}  
                   />
 
