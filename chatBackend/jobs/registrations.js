@@ -14,7 +14,7 @@ const handle_NewUsr = async(req,res)=>{
     
     const countFound = await userSchema.findOne({username: email}).exec();
     if(countFound)
-        return res.status(409).send({"msg":"You're already register for such email address"});
+        return res.send({"msg":"You're already register for such email address"});
     try{
         console.log(rights);
         const PERMISSION_REF_CODE =await permissionDB
