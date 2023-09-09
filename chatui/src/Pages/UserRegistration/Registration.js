@@ -7,6 +7,7 @@ import {io} from 'socket.io-client'
 import './Registration.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Registration = () => {
@@ -37,7 +38,7 @@ const Registration = () => {
         
     }
   return (
-    <Container className='LoginForm w-50 mt-5 p-4'>
+    <Container className='LoginForm w-50 mt-5 p-4'  >
         <Form>
             <legend className='mb-4'>User Registration Form</legend>
             <Form.Group className='mb-3'> 
@@ -69,6 +70,13 @@ const Registration = () => {
             </Stack>
         </Form>
         <Form.Label>{exceptionMsg}</Form.Label>
+       <Link style={{
+            textAlign:"center",
+            textDecoration:"none",
+            color: "#afb8c1",
+            font:"caption"
+
+       }} to="/Login"> <div>Back to Login</div></Link>
     </Container>
   )
 }
