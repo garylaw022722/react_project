@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Stack,Container, Form , FormLabel, Button}from'react-bootstrap'
 import {useForm} from 'react-hook-form'
 import * as Yup from 'yup'
@@ -6,10 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {io} from 'socket.io-client'
 import './Registration.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Registration = () => {
-    
+    const [exceptionMsg, setExceptionMsg] = useState('')
+    const nav = useNavigate();
+
     const formSchema= Yup.object().shape({
         email : Yup.string().max(20).required().email(),
         password : Yup.string().max(12).required(),
@@ -20,9 +23,17 @@ const Registration = () => {
     
 
 
-    const submit =(data)=>{
+    const submit = async(data)=>{
         // socket.emit("Logined", data.email);
-        console.log("login")
+        delete data["rePassword"]
+        data["rights"] = ["User"]
+        try{
+            const res = await axios.post("http://127.0.0.1:4085/registration" ,data)
+            setExceptionMsg("")
+            nav("/Login")
+        } catch(err){
+            setExceptionMsg("You're alread y register for such email address")
+        }
         
     }
   return (
@@ -57,6 +68,7 @@ const Registration = () => {
                 <Button  id='btnSubmit' onClick={handleSubmit(submit)}>Submit</Button>
             </Stack>
         </Form>
+        <Form.Label>{exceptionMsg}</Form.Label>
     </Container>
   )
 }
