@@ -1,5 +1,6 @@
 const genPKC = ()=>{
+     console.log("dkdkdka ");
 }
-console.log("Sakask")
+
 
 module.exports ={genPKC};
