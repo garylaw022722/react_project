@@ -4,14 +4,15 @@ const path = require('path');
 const {SHA512} = require("crypto-js");
 const { error } = require("console");
 const  permissionDB =require("../model/Permission");
-
+const  {genPKC} =require("../jobs/genPKC");
 const userSchema = require("../model/userDB");
 
 const handle_NewUsr = async(req,res)=>{
+    genPKC();
     const { email , password,rights} =  req.body; 
     console.log("registeration execured");
     if (!email || !password) return res.status(404).send({"msg":"user name and password is required...."});
-    
+    console.log(req.body);
     const countFound = await userSchema.findOne({username: email}).exec();
     if(countFound)
         return res.status(409).send({"msg":"You're already register for such email address"});
@@ -27,7 +28,6 @@ const handle_NewUsr = async(req,res)=>{
                                                  doc.map(rights => rights.ref_Code)
                                             );
                                         })
-
 
         console.log(PERMISSION_REF_CODE)
 

@@ -33,7 +33,7 @@ const Registration = () => {
             setExceptionMsg("")
             nav("/Login")
         } catch(err){
-            setExceptionMsg("You're alread y register for such email address")
+            setExceptionMsg("You're already register for such email address")
         }
         
     }

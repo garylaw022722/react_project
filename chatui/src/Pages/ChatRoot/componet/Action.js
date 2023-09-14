@@ -15,7 +15,7 @@ const Action = ({username}) => {
         <NavDropdown title="Action" >
                 <NavDropdown.Item  onClick={()=>dispatch(createNewContectFn(true))}>Create New Contact</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>Logout</NavDropdown.Item>         
+                <NavDropdown.Item >Logout</NavDropdown.Item>         
         </NavDropdown>
       </Stack>
 
