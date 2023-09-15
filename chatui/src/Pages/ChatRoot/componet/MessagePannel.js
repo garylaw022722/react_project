@@ -8,20 +8,24 @@ import { setMessageQueue, updateMessageQueue } from '../../../features/Messages'
 import {format } from 'date-fns'
 import SendBtn from './SendBtn'
 import { QueryCache, useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query'
+
 import axios from 'axios'
 
 const MessagePannel = ({socket,cur_user }) => {
 
-    const ref_Bottom =useRef(null);
+    
+    const user =  useSelector(state=> state.user.profile);
+    const {chatId} =  useSelector(state=> state.msgSlice.MessageHeader);
+    const {messageQueue} = useSelector(state=> state.msgSlice);
+    const chatKey =[process.env.REACT_APP_REACT_KEY_GET_MESSAGE , chatId];
+
 
     
-    const {chatId} =  useSelector(state=> state.msgSlice.MessageHeader);
-    const user =  useSelector(state=> state.user.profile);
-    // #message receive lisitener
-    console.log(chatId)
-    
+    const ref_Bottom =useRef(null);
+    const dispatch = useDispatch()    ;
     const client = useQueryClient();
-    const chatKey =[process.env.REACT_APP_REACT_KEY_GET_MESSAGE , chatId];
+    
+    
 
 
     
@@ -61,26 +65,42 @@ const MessagePannel = ({socket,cur_user }) => {
          
     }
 
-    const {isFetchingNextPage,data ,isLoading ,isStale ,hasNextPage ,isFetched, fetchNextPage} = useInfiniteQuery(["getMessageBytoken", chatId ], async({pageParam=0})=>await getRecord(pageParam) ,{
+    const {data ,isLoading ,isStale ,hasNextPage ,isRefetching,isFetched, fetchNextPage} = useInfiniteQuery(["getMessageBytoken", chatId ], async({pageParam=0})=>await getRecord(pageParam) ,{
         getNextPageParam: (lastPage, allPages) =>{
                 return  allPages?.length +1 ;
         },
+        keepPreviousData:false
+    
     })
     
     let msgs =[];
     if (isFetched){
+        
         const result =data?.pages?.flatMap(ele =>ele.data)
         console.log("result " ,result) 
         msgs =result?.reverse();
-        data?.pages.length ==1 &&  ref_Bottom?.current?.scrollIntoView();
+        ref_Bottom?.current?.scrollIntoView();
     }
 
+    useEffect( ()=>{
+        dispatch(setMessageQueue(msgs));
+ 
+    },[isFetched])
+
+
+    useEffect(()=>{
 
         socket.on("message", (data)=>{
-            console.log("data");
             client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_MESSAGE])
             client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_CONTACT_LIST])
+
+            const  date = new Date(data.sumited_at);
+            data.sumited_at= format(date,process.env.REACT_APP_DATE_FORMAT)
+
+            dispatch(updateMessageQueue(data));
+
         })
+    },[])
 
 
 
@@ -92,7 +112,9 @@ const MessagePannel = ({socket,cur_user }) => {
             <div className='mainContentChat'  onScroll={(e)=>fetchPriviousData(e)}  >
                     <Row >
                         {
-                            msgs?.map(({sender,sendTo , sumited_at ,message} ,index)=>{
+                            messageQueue?.map(({sender,sendTo , sumited_at ,message} ,index)=>{
+                                
+
                               if(cur_user===sendTo){
                                   return (<MessageReceiveLayout content={message} date={sumited_at} sender={sender} key={index}  />)
                               

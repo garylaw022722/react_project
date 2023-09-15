@@ -38,6 +38,7 @@ const createWorker =(msgs,numJobs)=>{
     
     const msg = msgs.splice(0,numJobs);
     threadPool.push(createThread(msg));
+    
 
     createWorker( msgs,numJobs);
 }
@@ -72,20 +73,15 @@ const getMessageByToken = async (req,res,next)=>{
             // console.log(log)
             
             log = log.map(ele=>ele.sources);
-            const logL = 14;
             const cpuLength = os.cpus().length;
-            const  numTread =(cpuLength > logL)? logL:  cpuLength;
+            const  numTread =(cpuLength > log.length)? log.length:  cpuLength;
 
-            const eachJobs =  Math.ceil(logL / numTread);
-            let overflow  =0;
-            if (eachJobs * numTread >  logL){
-                overflow = eachJobs * numTread % logL
-            }
+            const eachJobs =  Math.ceil(log.length / numTread);
+         
             
             console.info("cpu :",cpuLength)
             console.log("each job : ", eachJobs)
             console.log("number of thread : ", numTread);
-            console.log("number of overflow : ", overflow);
 
 
 
@@ -94,9 +90,11 @@ const getMessageByToken = async (req,res,next)=>{
             //collect  all of promise;
             let promisesData = await Promise.all(threadPool);
             promisesData = promisesData.flatMap(ele=>ele);
+            threadPool=[];
             
             console.log(promisesData);
             res.send(promisesData)        
+
             
             console.log("req body is ",req.body)
             

@@ -1,4 +1,7 @@
-show dbs
+db.primsgs.find()
+db.users.find()
+show collections
+db.users.find()
 show collections
 use test
 use admin

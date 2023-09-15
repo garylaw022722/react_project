@@ -26,7 +26,6 @@ const MessageSlice =  createSlice({
        },
 
        updateMessageQueue :(state, Action)=>{
-
             state.messageQueue = [...state.messageQueue , Action.payload]
        },
        updateSenderStatus :(state,Action)=>{

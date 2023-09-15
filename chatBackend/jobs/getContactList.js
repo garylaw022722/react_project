@@ -1,10 +1,12 @@
 const mongoose= require("mongoose");
-const  privMSG=require("../model/PrivateMessage")
+const  privMSG=require("../model/PrivateMessage");
+const  {decrypt}=require("../jobs/Decryption");
+
 const getContactList = async(req,res,next)=>{
     const  usrname = req.username;
     try{
         console.log("greppingn contact List ............");
-        const logs= await privMSG.aggregate([
+        let logs= await privMSG.aggregate([
              {
                 $project: { 
                             privateRoom_Token: 1,
@@ -22,6 +24,15 @@ const getContactList = async(req,res,next)=>{
          ])
 
          console.log("contact List created ............" , logs);
+
+         // decrypt the message before send out.
+         logs = await Promise.all (
+             logs.map(async(ele) =>{
+                        if(ele.sources.length > 0)
+                            ele.sources[0].message = await decrypt(ele.sources[0])
+                            return ele;
+                    })
+            );
 
         return res.send(logs)   
 

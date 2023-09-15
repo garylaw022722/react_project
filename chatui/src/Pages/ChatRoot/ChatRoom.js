@@ -44,8 +44,8 @@ const ChatRoom = () => {
     <React.Fragment>
 
     <Container fluid={true}  >
-      <Row  style={{border:"1px solid red" ,height:"100vh"}}>
-        <Col style={{border :"1px solid red" ,padding:'0'}} xs={3}> 
+      <Row  style={{height:"100vh"}}>
+        <Col style={{padding:'0'}} xs={3}> 
           <Stack>
             <Action username={username} socket={socket}/>
               {

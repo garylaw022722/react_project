@@ -27,13 +27,13 @@ const ShortList = ({}) => {
       
       const sender = participant.filter( usr => usr !== profile.username)
       // not undefind 
-      if(!sources[0])
-          return  <ContactITEM  
-                          name={sender}
-                          chatToken ={privateRoom_Token}
-                          key={privateRoom_Token}                          
-                          dateTime={new Date()}  
-                  />
+        if(!sources[0])
+            return  <ContactITEM  
+                            name={sender}
+                            chatToken ={privateRoom_Token}
+                            key={privateRoom_Token}                          
+                            dateTime={new Date()}  
+                    />
 
       const {message ,sumited_at ,sender:last_Msg_Sender} =  sources[0];
        

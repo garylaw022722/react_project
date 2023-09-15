@@ -4,21 +4,19 @@ import {Button, Form ,FormControl, Stack} from 'react-bootstrap'
 import Axios  from 'axios'
 import { useDispatch } from 'react-redux';
 import {format} from 'date-fns'
-import { date } from 'yup';
-import moment, {Moment} from 'moment'
-import MessageSenderLayout from './MessageSenderLayout';
-import {updateMessageQueue} from '../../../features/Messages'
+import {updateMessageQueue,setMessageQueue} from '../../../features/Messages'
 import {useSelector} from 'react-redux'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { da } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
 const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
     const [msg ,setMsg] = useState('');
     const client = useQueryClient()
-    const dispatch= useDispatch()    
+    const dispatch= useDispatch()  
     const  senderInfo =  useSelector(state => state.msgSlice.MessageHeader)
     const  {access_Token} =  useSelector(state => state.user.profile)
-
+    const  nav =useNavigate();
     
     const  updateChat = async(payload)=>{
         try{
@@ -28,7 +26,8 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
                     Authorization : access_Token
                 }
             })
-            return "success"
+
+            return  payload;
         }catch(err){
             console.log(err)
             return  "fail"
@@ -40,8 +39,11 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
             async(payload)=> await  updateChat( payload),
             {
                 onSuccess :(data)=>{
+                    console.log("data obtain" ,data);
                     client.invalidateQueries(chatKey)
                     client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_CONTACT_LIST])
+                    data.sumited_at= format(data.sumited_at ,process.env.REACT_APP_DATE_FORMAT)
+                    dispatch(updateMessageQueue(data));
                 }
             }
         )
@@ -49,9 +51,7 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
         const sendMutation = ()=>{
 
         const sendDate =new Date();
-        const timestamp = format(sendDate ,process.env.REACT_APP_DATE_FORMAT)
         
-        console.log(timestamp)
         const payload = {...senderInfo ,message : msg,sumited_at: sendDate}
         
         socket.emit("message" , payload)
@@ -69,24 +69,7 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
 
 
 
-    const send = ()=>{
-        const sendDate =new Date();
-        const timestamp = format(sendDate ,process.env.REACT_APP_DATE_FORMAT)
-        
-        console.log(timestamp)
-        const payload = {...senderInfo ,message : msg,sumited_at: sendDate}
-        
-        console.log(payload)
-        socket.emit("message" , payload)
-        payload.sumited_at = timestamp;
-        
-        setMsg('')
-        ref_Bottom?.current?.scrollIntoView({ behavior: 'smooth' });
-
-        
-  
-            
-    }
+    
     const focusout=(e)=>{
         socket.emit("typing" ,{...senderInfo, isTyping:false})
     }
