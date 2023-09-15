@@ -21,6 +21,7 @@ const createThread=(encrypted_MSGs)=>{
             })
 
             thread.on("error", (err) => {
+                //child data cannot return 
                 reject(err)
               });
             
@@ -81,7 +82,7 @@ const getMessageByToken = async (req,res,next)=>{
                 overflow = eachJobs * numTread % logL
             }
             
-            console.log("cpu :",cpuLength)
+            console.info("cpu :",cpuLength)
             console.log("each job : ", eachJobs)
             console.log("number of thread : ", numTread);
             console.log("number of overflow : ", overflow);
