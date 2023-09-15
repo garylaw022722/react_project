@@ -4,8 +4,8 @@ const {authentication} = require("../controller/authenticateController");
 
 const {createContactItem,getMessageByToken, createChatRoom ,logout,getContactList, jointRoom ,loadPrivateMsg, backupMsg} = require("../controller/UserController")
 const jwtVerifier = require("../middlewares/jwtVerify");
-const { sendMessage } = require("../jobs/sendMessages");
-const jwtVertify = require("../middlewares/jwtVerify");
+const  encrpytion= require("../middlewares/encrption");
+
 
 router.route("/login").post(authentication)
 
@@ -36,6 +36,6 @@ router.route("/createContactUsr")
       
 
 router.route("/backup")      
-      .post(jwtVerifier ,backupMsg)
+      .post(jwtVerifier,encrpytion ,backupMsg)
       
 module.exports= router;

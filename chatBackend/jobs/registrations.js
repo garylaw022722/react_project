@@ -4,11 +4,10 @@ const path = require('path');
 const {SHA512} = require("crypto-js");
 const { error } = require("console");
 const  permissionDB =require("../model/Permission");
-const  {genPKC} =require("../jobs/genPKC");
+const  {genPKC_with_X509} =require("../jobs/genPKC");
 const userSchema = require("../model/userDB");
 
 const handle_NewUsr = async(req,res)=>{
-    genPKC();
     const { email , password,rights} =  req.body; 
     console.log("registeration execured");
     if (!email || !password) return res.status(404).send({"msg":"user name and password is required...."});
@@ -38,6 +37,7 @@ const handle_NewUsr = async(req,res)=>{
             });
         
         console.log(updateRecord)
+        genPKC_with_X509(email);
 
     
 

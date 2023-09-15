@@ -1,4 +1,4 @@
-const { handle_NewUsr} =  require("../controller/registerController");
+const { handle_NewUsr} =  require("../jobs/registrations");
 const express =require("express")
 const path =require("path");
 const router = express.Router();
