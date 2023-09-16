@@ -53,7 +53,6 @@ const ChatRoom = () => {
                 <ContactCreateForm access_token={access_Token} />
                 
                 :<div>
-                  <Search />
                   <ShortList  setContactList={setContactList} contactList={contactList} />
                 </div>
               }

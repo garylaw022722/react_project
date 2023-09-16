@@ -35,12 +35,11 @@ const SendBtn = ({socket ,msgQueue ,setMsgQueue ,ref_Bottom ,chatKey}) => {
     }
     
     
-    const {mutate,} = useMutation(
+    const {mutate} = useMutation(
             async(payload)=> await  updateChat( payload),
             {
                 onSuccess :(data)=>{
                     console.log("data obtain" ,data);
-                    client.invalidateQueries(chatKey)
                     client.invalidateQueries([process.env.REACT_APP_REACT_KEY_GET_CONTACT_LIST])
                     data.sumited_at= format(data.sumited_at ,process.env.REACT_APP_DATE_FORMAT)
                     dispatch(updateMessageQueue(data));

@@ -38,7 +38,7 @@ const MessagePannel = ({socket,cur_user }) => {
                         "Authorization" :user.access_Token , 
                 },
             })
-            console.log(data)
+            console.log("vgbbhhbbj",data)
             return data
         }catch(err){
             console.log(err)

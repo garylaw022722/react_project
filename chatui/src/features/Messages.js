@@ -11,7 +11,8 @@ let MSG_initState ={
         senderStatus :'',
         openTheChat : false,
         createNewContect : false,
-        newContactor :[]
+        newContactor :[],
+        searchKey :'',
         
     
 }
@@ -31,6 +32,9 @@ const MessageSlice =  createSlice({
        updateSenderStatus :(state,Action)=>{
                 state.senderStatus = Action.payload;
        },
+        setSerachKeys :(state,Action)=>{
+                state.searchKey =Action.payload
+       },
        updateOpenTheChat : (state, Action)=> {
                 state.openTheChat = Action
        },
@@ -46,6 +50,6 @@ const MessageSlice =  createSlice({
         
     }
 })
-export const {createNewContectFn,setMessageQueue ,updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
+export const {setSerachKeys,createNewContectFn,setMessageQueue ,updateOpenTheChat ,updateSenderTarget , updateMessageQueue, updateSenderStatus} =MessageSlice.actions;
 
 export default MessageSlice.reducer;

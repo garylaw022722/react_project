@@ -2,7 +2,7 @@ const userDB =require("../model/userDB");
 
 const logout =async (req,res, next)=>{
     const cookies = req.cookies;
-    
+
     if(cookies?.jwt){
         const refresh_token = cookies.jwt;
         const located_usr = await userDB.findOne({"refreshToken": refresh_token}).exec();
@@ -15,9 +15,9 @@ const logout =async (req,res, next)=>{
             )
         }
         
+        res.send("success to logout")
     }
     
-    res.send("success to logout")
 
 
 

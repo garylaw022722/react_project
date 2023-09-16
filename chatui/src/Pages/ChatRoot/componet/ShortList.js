@@ -6,11 +6,12 @@ import { useQuery} from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { alignPropType } from 'react-bootstrap/esm/types'
+import Search from './Search'
 const ShortList = ({}) => {
   
   const profile = useSelector(state=>state.user.profile);
+  const {searchKey} = useSelector(ele=>ele.msgSlice);
 
-  const [contactList ,setContactList] = useState([]);
   const {data ,isLoading ,isFetched,error} =useQuery(["getContactList"] , ()=>{
       return axios.get( "http://127.0.0.1:4085/nusrRoute/getContactList",{
         headers :{
@@ -26,7 +27,8 @@ const ShortList = ({}) => {
     items = data?.data?.map(({participant, sources,privateRoom_Token},index)=>{
       
       const sender = participant.filter( usr => usr !== profile.username)
-      // not undefind 
+      if(sender[0].includes(searchKey) ||  searchKey===''){
+
         if(!sources[0])
             return  <ContactITEM  
                             name={sender}
@@ -34,12 +36,12 @@ const ShortList = ({}) => {
                             key={privateRoom_Token}                          
                             dateTime={new Date()}  
                     />
-
+  
       const {message ,sumited_at ,sender:last_Msg_Sender} =  sources[0];
        
       const msg=(last_Msg_Sender!== profile.username)?message:`You : ${message}`
-
-
+  
+  
       return <ContactITEM 
                     lastestMSG={msg} 
                     name={sender} 
@@ -48,7 +50,11 @@ const ShortList = ({}) => {
                     key={privateRoom_Token}  
                     />
 
+      }
+
+
     })
+
     items?.sort((item1 ,item2) => {
       if(item2.props?.dateTime && item1.props?.dateTime)
         return  new Date(item2.props.dateTime) -  new Date(item1.props.dateTime) 
@@ -58,11 +64,13 @@ const ShortList = ({}) => {
 
 
   return (
-   
-    <div className='contactList'>
-        {items?.map(ele=>ele)}
-    </div>
-  )
+   <>
+      <Search/>
+      <div className='contactList'>
+          {items?.map(ele=>ele)}
+      </div>
+   </>
+    )
 }
 
 export default ShortList
