@@ -1,5 +1,5 @@
 # Introduction
-This project is to create a instanct chat Channel with Socket.io and some basic react technology. The backend would be implemented by NodeJS , while fronend is using  typescript and reactjs
+This project is to create a instanct chat Channel with Socket.io and some basic react technology.
 
 # Tech Stack
 $ Back-end 
