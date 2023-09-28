@@ -35,7 +35,6 @@ const  encrypt=async(req,res ,next)=>{
 
 module.exports =encrypt;
 
-// const ciphertext = encrypt("dev1329@gmail.com","dev0329@gmail.com" ,"dllm").then(ele=>console.log(ele));
 
 
                 
